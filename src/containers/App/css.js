@@ -10,12 +10,12 @@ export const ContentWrapper = styled( Layout.Content )`
 `;
 
 export const Content = styled.div`
-    background : #fff;
     padding    : 24px;
     min-height : 280px;
     margin     : 16px 0;
 `;
 
 export const FooterWrapper = styled( Layout.Footer )`
-    text-align : center;
+    text-align       : center;
+    background-color : #FAFAFA;
 `;

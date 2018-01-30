@@ -21,7 +21,7 @@ class App extends Component {
                     </Content>
                 </ContentWrapper>
                 <FooterWrapper>
-                    Reserve © 2018
+                    Footer © 2018
                 </FooterWrapper>
             </LayoutWrapper>
         );
