@@ -16,7 +16,7 @@ class CartWrapper extends Component {
                         renderItem={item => (
                             <List.Item actions={[
                                 <p>&#8369; 60 x</p>,
-                                <InputNumber min="1" max="10000"/>,
+                                <InputNumber min={1} max={10000}/>,
                                 <p>&#8369; 500</p>
                             ]}>
                                 <List.Item.Meta
