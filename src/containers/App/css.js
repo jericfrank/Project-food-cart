@@ -16,6 +16,6 @@ export const Content = styled.div`
 `;
 
 export const FooterWrapper = styled( Layout.Footer )`
-    text-align       : center;
-    background-color : #FAFAFA;
+    text-align : center;
+    background : #FAFAFA !important;;
 `;
