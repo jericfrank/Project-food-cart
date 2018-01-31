@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Affix, List, Avatar, Button, Input } from 'antd';
+import { Affix, List, Avatar, Button, InputNumber } from 'antd';
 
 import { ORDERS } from './constants';
 import { Wrapper } from './css';
@@ -10,13 +10,14 @@ class CartWrapper extends Component {
             <Affix>
                 <Wrapper>
                     <List
+                        size="small"
                         itemLayout="horizontal"
                         dataSource={ORDERS}
                         renderItem={item => (
                             <List.Item actions={[
-                                <Button type="dashed" size="small" icon="plus" />,
-                                <Input value="1" style={{ width : "50px" }}/>,
-                                <Button type="dashed" size="small" icon="minus" />
+                                <p>&#8369; 60 x</p>,
+                                <InputNumber min="1" max="10000"/>,
+                                <p>&#8369; 500</p>
                             ]}>
                                 <List.Item.Meta
                                     avatar={<Avatar src="/example.jpg" />}

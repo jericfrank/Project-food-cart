@@ -5,7 +5,7 @@ import { Row, Col, Pagination } from 'antd';
 import Item from 'components/Item';
 
 import { ITEMS } from './constants';
-import { Wrapper } from './css';
+import { Wrapper, PaginateWrapper } from './css';
 
 class ItemWrapper extends Component {
     renderItems ( value, key ) {
@@ -22,9 +22,9 @@ class ItemWrapper extends Component {
                 <Row gutter={8}>
                     { _.map( ITEMS, this.renderItems ) }
                 </Row>
-                <div style={{ float: 'right', padding: '15px 0 0 0' }}>
+                <PaginateWrapper>
                     <Pagination defaultCurrent={1} total={100} />
-                </div>
+                </PaginateWrapper>
             </Wrapper>
         );
     }

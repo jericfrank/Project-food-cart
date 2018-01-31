@@ -8,10 +8,10 @@ class HomePage extends Component {
     render() {
         return (
             <Row gutter={8}>
-                <Col span={18} push={6}>
+                <Col span={18}>
                     <ItemWrapper />
                 </Col>
-                <Col span={6} pull={18}>
+                <Col span={6}>
                     <CartWrapper />
                 </Col>
             </Row>
