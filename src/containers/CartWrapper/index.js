@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Affix, List, Avatar, Button, InputNumber } from 'antd';
+import { Affix, List, Avatar, InputNumber, Icon, Divider } from 'antd';
 
 import { ORDERS } from './constants';
-import { Wrapper } from './css';
+import { Wrapper, Total, CheckoutWrapper, CheckoutButton } from './css';
 
 class CartWrapper extends Component {
     render() {
@@ -15,9 +15,9 @@ class CartWrapper extends Component {
                         dataSource={ORDERS}
                         renderItem={item => (
                             <List.Item actions={[
-                                <p>&#8369; 60 x</p>,
-                                <InputNumber min={1} max={10000}/>,
-                                <p>&#8369; 500</p>
+                                <p>&#8369; 60.00 x</p>,
+                                <InputNumber defaultValue={1} min={1} max={10000}/>,
+                                <p>&#8369; 30.00</p>
                             ]}>
                                 <List.Item.Meta
                                     avatar={<Avatar src="/example.jpg" />}
@@ -26,10 +26,16 @@ class CartWrapper extends Component {
                             </List.Item>
                         )}
                     />
-                    <div style={{ padding : '15px 0 0 0' }}>
-                        <Button type="default" style={{ width : '49%' }}>Checkout</Button>
-                        <Button type="default" style={{ width : '49%', float : 'right' }}>Cancel</Button>
-                    </div>
+                    <Total>
+                        &#8369; <span>1,500.00</span>
+                    </Total>
+                    <Divider/>
+                    <CheckoutWrapper>
+                        <CheckoutButton type="primary">
+                            <Icon type="shopping-cart" /> Checkout
+                        </CheckoutButton>
+                        <CheckoutButton type="default" position="right">Cancel</CheckoutButton>
+                    </CheckoutWrapper>
                 </Wrapper>
             </Affix>
         );
