@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
-import { SigninFormWrapper } from './css';
+import { SignInFormWrapper } from './css';
 
 const FormItem = Form.Item;
 
-class SigninPage extends Component {
+class SignInPage extends Component {
 	componentDidMount() {
 		// 
 	}
 
     render() {
         return (
-            <SigninFormWrapper>
-                <h1>SigninPage</h1>
+            <SignInFormWrapper>
+                <h1>SignInPage</h1>
                 <Form className="login-form">
                     <FormItem>
                         <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
@@ -26,9 +26,9 @@ class SigninPage extends Component {
                         </Button>
                     </FormItem>
                 </Form>
-            </SigninFormWrapper>
+            </SignInFormWrapper>
         );
     }
 }
 
-export default SigninPage;
+export default SignInPage;

@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage';
 import ContactPage from 'containers/ContactPage';
-import SigninPage from 'containers/SigninPage';
+import SignInPage from 'containers/SignInPage';
 
 import Callback from 'components/Callback';
 
@@ -18,7 +18,7 @@ class App extends Component {
                         <Switch>
                             <Route exact path='/' component={HomePage}/>
                             <Route path='/contact' component={ContactPage}/>
-                            <Route path='/signin' component={SigninPage}/>
+                            <Route path='/signin' component={SignInPage}/>
                             <Route path='/callback/:provider' component={Callback}/>
                         </Switch>
                     </Content>

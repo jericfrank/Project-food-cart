@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SigninFormWrapper = styled.div`
+export const SignInFormWrapper = styled.div`
     .login-form {
         width         : 300px;
         margin        : 0;
