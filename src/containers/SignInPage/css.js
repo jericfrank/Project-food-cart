@@ -14,4 +14,8 @@ export const SignInFormWrapper = styled.div`
     .login-form-button {
         width: 100%;
     }
+
+    .error {
+        color : red;
+    }
 `;
