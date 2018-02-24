@@ -5,6 +5,8 @@ import HomePage from 'containers/HomePage';
 import ContactPage from 'containers/ContactPage';
 import SignInPage from 'containers/SignInPage';
 
+import HeaderWrapper from 'containers/HeaderWrapper';
+
 import Callback from 'components/Callback';
 
 import { LayoutWrapper, ContentWrapper, Content, FooterWrapper } from './css';
@@ -14,6 +16,7 @@ class App extends Component {
         return (
             <LayoutWrapper>
                 <ContentWrapper>
+                    <HeaderWrapper />
                     <Content>
                         <Switch>
                             <Route exact path='/' component={HomePage}/>

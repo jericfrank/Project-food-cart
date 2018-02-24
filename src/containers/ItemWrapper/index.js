@@ -19,7 +19,7 @@ class ItemWrapper extends Component {
     render () {
         return (
             <Wrapper>
-                <Row gutter={8}>
+                <Row gutter={24}>
                     { _.map( ITEMS, this.renderItems ) }
                 </Row>
                 <PaginateWrapper>
