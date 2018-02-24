@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Divider } from 'antd';
+import { Form, Icon, Input, Button, Divider, Alert } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { reduxForm, Fields } from 'redux-form';
@@ -13,6 +13,12 @@ import { makeSelectUser, makeSelectError } from './selectors';
 const FormItem = Form.Item;
 
 class SignInPage extends Component {
+    constructor() {
+        super();
+
+        this.renderError = this.renderError.bind(this);
+    }
+
 	componentDidMount() {
 		//
 	}
@@ -42,13 +48,15 @@ class SignInPage extends Component {
         );
     }
 
-    // renderError() {
-    //     if ( this.props.errorMsg ) {
-    //         return (
-    //             <p>{this.props.errorMsg}</p>
-    //         );
-    //     }
-    // }
+    renderError() {
+        const { errorMsg } = this.props;
+
+        if ( errorMsg ) {
+            return (
+                <Alert message={`Error: ${errorMsg}`} type="error" style={{ marginTop: 10 }} showIcon={false} banner/>
+            );
+        }
+    }
 
     render() {
         const { handleSubmit, fields } = this.props;
@@ -65,6 +73,7 @@ class SignInPage extends Component {
                             <Button className="login-form-button">
                                 Create account
                             </Button>
+                            {this.renderError()}
                             <Divider />
                             <Button icon="github" className="login-form-button">
                                 Sign in with Github
