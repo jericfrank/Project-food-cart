@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Divider } from 'antd';
 import { reduxForm, Fields } from 'redux-form'
 
+import { postRequest } from 'utils/request';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
 
 const FormItem = Form.Item;
@@ -12,8 +13,10 @@ class SignInPage extends Component {
 		// 
 	}
 
-    handleFormSubmit( fields ) {
-        console.log( fields );
+    handleFormSubmit( { email, password } ) {
+        postRequest('login', { email, password })
+            .then( res => console.log( res ) )
+            .catch( err => console.log( err ) );
     }
 
     renderFields( fields ) {
