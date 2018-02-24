@@ -11,7 +11,7 @@ function handleError ( response ) {
 	let err = JSON.stringify( response );
 	    err = JSON.parse( err );
 
-	return err.response.data;
+	throw err.response.data;
 }
 
 export function getRequest ( url ) {

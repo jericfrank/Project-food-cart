@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
+import authReducer from 'containers/SignInPage/reducer';
+
 const rootReducer = combineReducers({
-	state : (state = {}) => state,
-	form  : formReducer
+	auth : authReducer,
+	form : formReducer
 });
 
 export default rootReducer;

@@ -8,12 +8,12 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './global-css.js';
 import App from 'containers/App';
-import reducer from './reducer';
+import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
-	<Provider store={createStoreWithMiddleware(reducer)}>
+	<Provider store={createStoreWithMiddleware(reducers)}>
 		<BrowserRouter>
 	        <App />
 	    </BrowserRouter>

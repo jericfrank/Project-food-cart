@@ -1,22 +1,28 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Divider } from 'antd';
-import { reduxForm, Fields } from 'redux-form'
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { reduxForm, Fields } from 'redux-form';
 
 import { postRequest } from 'utils/request';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
+import { authSignin, authError } from './actions';
+import { makeSelectUser, makeSelectError } from './selectors';
 
 const FormItem = Form.Item;
 
 class SignInPage extends Component {
 	componentDidMount() {
-		// 
+		//
 	}
 
     handleFormSubmit( { email, password } ) {
+        const { dispatch } = this.props;
+
         postRequest('login', { email, password })
-            .then( res => console.log( res ) )
-            .catch( err => console.log( err ) );
+            .then( res => dispatch( authSignin( res ) ) )
+            .catch( err => dispatch( authError( err ) ) );
     }
 
     renderFields( fields ) {
@@ -35,6 +41,14 @@ class SignInPage extends Component {
             </div>
         );
     }
+
+    // renderError() {
+    //     if ( this.props.errorMsg ) {
+    //         return (
+    //             <p>{this.props.errorMsg}</p>
+    //         );
+    //     }
+    // }
 
     render() {
         const { handleSubmit, fields } = this.props;
@@ -80,10 +94,15 @@ function validator({ email, password }) {
     return errors;
 }
 
-SignInPage = reduxForm({
+const mapStateToProps = createStructuredSelector( {
+    auth     : makeSelectUser(),
+    errorMsg : makeSelectError()
+} );
+
+SignInPage = connect(mapStateToProps)(SignInPage);
+
+export default reduxForm({
     form     : 'SignInPageForm',
     fields   : [ 'email', 'password' ],
     validate : validator
 })(SignInPage);
-
-export default SignInPage;
