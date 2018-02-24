@@ -15,6 +15,7 @@ class HeaderWrapper extends Component {
         			<Button icon="lock">Signin</Button>
         			<Button icon="user">Sign Up</Button>
         		</div>
+                <div style={{ clear: 'both' }}></div>
 			</Wrapper>
         );
     }

@@ -10,7 +10,6 @@ export const ContentWrapper = styled( Layout.Content )`
 `;
 
 export const Content = styled.div`
-    padding    : 24px;
     min-height : 280px;
     margin     : 16px 0;
 `;
