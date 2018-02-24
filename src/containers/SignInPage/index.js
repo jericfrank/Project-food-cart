@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, Divider } from 'antd';
 import { reduxForm, Fields } from 'redux-form'
 
-import { SignInFormWrapper } from './css';
+import { SignInPageWrapper, SignInFormWrapper } from './css';
 
 const FormItem = Form.Item;
 
@@ -37,17 +37,28 @@ class SignInPage extends Component {
         const { handleSubmit, fields } = this.props;
 
         return (
-            <SignInFormWrapper>
-                <h1>SignInPage</h1>
-                <Form onSubmit={handleSubmit( this.handleFormSubmit.bind(this) )} className="login-form">
-                    <Fields names={fields} component={this.renderFields.bind(this)}/>
-                    <FormItem>
-                        <Button type="primary" htmlType="submit" className="login-form-button">
-                            Sign in
-                        </Button>
-                    </FormItem>
-                </Form>
-            </SignInFormWrapper>
+            <SignInPageWrapper>
+                <SignInFormWrapper>
+                    <Form onSubmit={handleSubmit( this.handleFormSubmit.bind(this) )} className="login-form">
+                        <Fields names={fields} component={this.renderFields.bind(this)}/>
+                        <FormItem>
+                            <Button type="primary" htmlType="submit" className="login-form-button">
+                                Sign in
+                            </Button>
+                            <Button className="login-form-button">
+                                Create account
+                            </Button>
+                            <Divider />
+                            <Button icon="github" className="login-form-button">
+                                Sign in with Github
+                            </Button>
+                            <Button icon="google" className="login-form-button">
+                                Sign in with Google
+                            </Button>
+                        </FormItem>
+                    </Form>
+                </SignInFormWrapper>
+            </SignInPageWrapper>
         );
     }
 }

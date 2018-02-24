@@ -19,3 +19,10 @@ export const SignInFormWrapper = styled.div`
         color : red;
     }
 `;
+
+export const SignInPageWrapper = styled.div`
+    display         : flex;
+    flex-direction  : column;
+    align-items     : center;
+    justify-content : center;
+`;
