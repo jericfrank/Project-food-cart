@@ -7,7 +7,7 @@ import { reduxForm, Fields } from 'redux-form';
 
 import { SignInPageWrapper, SignInFormWrapper } from './css';
 import { authSignin } from './actions';
-import { makeSelectUser, makeSelectError } from './selectors';
+import { selectSigninPageError } from './selectors';
 
 const FormItem = Form.Item;
 
@@ -99,8 +99,7 @@ function validator({ email, password }) {
 }
 
 const mapStateToProps = createStructuredSelector( {
-    auth     : makeSelectUser(),
-    errorMsg : makeSelectError()
+    errorMsg : selectSigninPageError()
 } );
 
 export function mapDispatchToProps ( dispatch ) {
