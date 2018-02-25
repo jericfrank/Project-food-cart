@@ -61,7 +61,9 @@ class HeaderWrapper extends Component {
     render() {
         return (
         	<Wrapper>
-        		<h2 className="pull-left">Company Logo</h2>
+                <Link to="/">
+        	       <h2 className="pull-left">Company Logo</h2>
+                </Link>
                 <div className="pull-right">
                     { this.renderButtons() }
                 </div>

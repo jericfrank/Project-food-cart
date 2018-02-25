@@ -12,7 +12,7 @@ function* watchAuthSignin( action ) {
 
         yield call( handleToken, response )
         yield put( authSuccess( response.user ) );
-        yield put( push( '/' ) );
+        yield put( push( '/home' ) );
     } catch (e) {
         yield put( authError( e ) );
     }
