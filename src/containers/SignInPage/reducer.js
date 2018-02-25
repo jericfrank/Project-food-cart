@@ -23,10 +23,15 @@ export default function(state = initialState, action) {
 
 		case AUTH_ERROR:
 			return state
+				.set( 'loading', false )
 				.set( 'errorMsg', action.payload );
 
 		case AUTH_SIGNOUT:
-			return state;
+			return state
+				.set( 'loading', false )
+				.set( 'authenticate', false )
+				.set( 'errorMsg', '' )
+				.set( 'user', {} );
 
 		default:
 			return state;

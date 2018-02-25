@@ -7,9 +7,10 @@ export function authSignin(payload) {
 	}
 }
 
-export function authSuccess() {
+export function authSuccess(payload) {
 	return {
-		type: AUTH_SUCCESS
+		type: AUTH_SUCCESS,
+		payload
 	}
 }
 
