@@ -5,8 +5,8 @@ import WelcomePage from 'containers/WelcomePage';
 import HomePage from 'containers/HomePage';
 import ContactPage from 'containers/ContactPage';
 import SignInPage from 'containers/SignInPage';
+import CallbackPage from 'containers/CallbackPage';
 
-import Callback from 'components/Callback';
 import RequireAuth from 'components/Auth/require_auth';
 
 import { LayoutWrapper, ContentWrapper, Content, FooterWrapper } from './css';
@@ -19,10 +19,10 @@ class App extends Component {
                     <Content>
                         <Switch>
                             <Route exact path='/' component={WelcomePage}/>
-                            <Route exact path='/home' component={HomePage}/>
+                            <Route path='/home' component={HomePage}/>
                             <Route path='/contact' component={RequireAuth( ContactPage )}/>
                             <Route path='/signin' component={SignInPage}/>
-                            <Route path='/callback/:provider' component={Callback}/>
+                            <Route path='/callback/:provider' component={CallbackPage}/>
                         </Switch>
                     </Content>
                 </ContentWrapper>
