@@ -53,7 +53,9 @@ class HeaderWrapper extends Component {
                 <Link to="/signin">
                     <Button icon="lock">Signin</Button>
                 </Link>
-                <Button icon="user">Sign Up</Button>
+                <Link to="/signup">
+                    <Button icon="user">Sign Up</Button>
+                </Link>
             </div>
         );
     }

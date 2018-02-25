@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Divider, Alert } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -70,9 +71,11 @@ class SignInPage extends Component {
                             <Button type="primary" htmlType="submit" className="login-form-button">
                                 Sign in
                             </Button>
-                            <Button className="login-form-button">
-                                Create account
-                            </Button>
+                            <Link to="signup">
+                                <Button className="login-form-button">
+                                    Create account
+                                </Button>
+                            </Link>
                             {this.renderError()}
                             <Divider />
                             <Button onClick={this.handleSocialLogin} name="github" icon="github" className="login-form-button">

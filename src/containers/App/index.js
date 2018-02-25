@@ -5,6 +5,7 @@ import WelcomePage from 'containers/WelcomePage';
 import HomePage from 'containers/HomePage';
 import ContactPage from 'containers/ContactPage';
 import SignInPage from 'containers/SignInPage';
+import SignUpPage from 'containers/SignUpPage';
 import CallbackPage from 'containers/CallbackPage';
 
 import RequireAuth from 'components/Auth/require_auth';
@@ -22,6 +23,7 @@ class App extends Component {
                             <Route path='/home' component={HomePage}/>
                             <Route path='/contact' component={RequireAuth( ContactPage )}/>
                             <Route path='/signin' component={SignInPage}/>
+                            <Route path='/signup' component={SignUpPage}/>
                             <Route path='/callback/:provider' component={CallbackPage}/>
                         </Switch>
                     </Content>
