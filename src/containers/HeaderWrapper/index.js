@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Avatar, Button, Menu, Dropdown } from 'antd';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -18,7 +19,7 @@ class HeaderWrapper extends Component {
     }
 
     handleNavigate( { key } ) {
-        if ( key === 'siginOut' ) {
+        if ( key === 'signOut' ) {
             this.props.authSignout();
         }
     }
@@ -32,7 +33,7 @@ class HeaderWrapper extends Component {
             const menu = (
                 <Menu onClick={this.handleNavigate}>
                     <Menu.Item>Account</Menu.Item>
-                    <Menu.Item key="siginOut">Logout</Menu.Item>
+                    <Menu.Item key="signOut">Sign Out</Menu.Item>
                 </Menu>
             );
 
@@ -41,7 +42,7 @@ class HeaderWrapper extends Component {
                     <Category />
                     <Button icon="shopping-cart">Cart(2)</Button>
                     <Dropdown overlay={menu} placement="bottomRight">
-                        <Avatar shape="square" src={`${process.env.REACT_APP_HOST}/${providers[0].avatar}`}/>
+                        <Avatar shape="square" src={providers[0].avatar}/>
                     </Dropdown>
                 </div>
             );
@@ -49,7 +50,9 @@ class HeaderWrapper extends Component {
         
         return (
             <div>
-                <Button icon="lock">Signin</Button>
+                <Link to="/signin">
+                    <Button icon="lock">Signin</Button>
+                </Link>
                 <Button icon="user">Sign Up</Button>
             </div>
         );
