@@ -1,6 +1,5 @@
 {
-  "homepage": "https://jericfrank.github.io/project-food-cart",
-  "name": "project-food-cart",
+  "name": "ecommerce-online-store",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,7 +24,6 @@
     "babel-plugin-import": "^1.6.3",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "gh-pages": "^1.1.0",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.4.1",
     "react-scripts": "1.1.0"
@@ -34,8 +32,6 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   }
 }
