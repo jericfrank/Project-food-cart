@@ -23,9 +23,9 @@ function* watchAuthSignout() {
         yield call( getRequest, 'logout' );
         yield call( expireToken );
         yield put( authSignout() );
-        yield put( push( '/' ) );
+        yield put( push( '/signin' ) );
     } catch (e) {
-        yield put( push( '/' ) );
+        yield put( push( '/signin' ) );
     }
 }
 

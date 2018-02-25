@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { AUTH_SIGNIN, AUTH_SUCCESS, AUTH_ERROR, AUTH_SIGNOUT } from './constants';
+import { AUTH_SIGNIN, AUTH_SUCCESS, AUTH_ERROR, AUTH_SIGNOUT, AUTH_CURRENT } from './constants';
 
 const initialState = fromJS( {
 	authenticate : false,
@@ -32,6 +32,13 @@ export default function(state = initialState, action) {
 				.set( 'authenticate', false )
 				.set( 'errorMsg', '' )
 				.set( 'user', {} );
+
+		case AUTH_CURRENT:
+			return state
+				.set( 'loading', false )
+				.set( 'authenticate', true )
+				.set( 'errorMsg', '' )
+				.set( 'user', action.payload );
 
 		default:
 			return state;
