@@ -1,8 +1,9 @@
-# Project-food-cart
+# Ecommerce Online Store
 
 ## Environment Variables
  ```env
-    NODE_ENV=src
+	NODE_PATH=<node-path>
+	REACT_APP_HOST=<server-ip>
  ```
 
 ## Installation
@@ -15,4 +16,4 @@ In order to setup, run and start hacking the app locally you just have to:
 At this point, you should be have your local deploy running on `http://localhost:3000`.
 
 ## Test Server
-Deploy to [heruko]( https://project-food-cart.herokuapp.com/ ) for demonstration.
+Deploy to [heruko]( https://ecommerce-online-store.herokuapp.com/ ) for demonstration.
