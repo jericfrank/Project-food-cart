@@ -5,9 +5,8 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { reduxForm, Fields } from 'redux-form';
 
-import { postRequest } from 'utils/request';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
-import { authSignin, authError } from './actions';
+import { authSignin } from './actions';
 import { makeSelectUser, makeSelectError } from './selectors';
 
 const FormItem = Form.Item;
@@ -24,11 +23,7 @@ class SignInPage extends Component {
 	}
 
     handleFormSubmit( { email, password } ) {
-        const { dispatch } = this.props;
-
-        postRequest('login', { email, password })
-            .then( res => dispatch( authSignin( res ) ) )
-            .catch( err => dispatch( authError( err ) ) );
+        this.props.authSignin( { email, password } );
     }
 
     renderFields( fields ) {
@@ -108,10 +103,16 @@ const mapStateToProps = createStructuredSelector( {
     errorMsg : makeSelectError()
 } );
 
-SignInPage = connect(mapStateToProps)(SignInPage);
+export function mapDispatchToProps ( dispatch ) {
+    return {
+        authSignin : ( payload ) => dispatch( authSignin( payload ) )
+    };
+}
 
-export default reduxForm({
+SignInPage = reduxForm({
     form     : 'SignInPageForm',
     fields   : [ 'email', 'password' ],
     validate : validator
 })(SignInPage);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);

@@ -6,6 +6,7 @@
   "dependencies": {
     "antd": "^3.1.6",
     "axios": "^0.17.1",
+    "crypto-js": "^3.1.9-1",
     "immutable": "^3.8.2",
     "prop-types": "^15.6.0",
     "query-string": "^5.1.0",
@@ -13,8 +14,10 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
+    "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
     "styled-components": "^3.1.4"
   },

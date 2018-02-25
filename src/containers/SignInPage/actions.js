@@ -1,4 +1,4 @@
-import { AUTH_SIGNIN, AUTH_ERROR } from './constants';
+import { AUTH_SIGNIN, AUTH_SUCCESS, AUTH_ERROR, AUTH_SIGNOUT } from './constants';
 
 export function authSignin(payload) {
 	return {
@@ -7,9 +7,21 @@ export function authSignin(payload) {
 	}
 }
 
+export function authSuccess() {
+	return {
+		type: AUTH_SUCCESS
+	}
+}
+
 export function authError(error) {
 	return {
 		type    : AUTH_ERROR,
 		payload : error
+	}
+}
+
+export function authSignout() {
+	return {
+		type: AUTH_SIGNOUT
 	}
 }
