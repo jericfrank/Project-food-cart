@@ -1,4 +1,4 @@
-import { AUTH_SIGNIN, AUTH_SUCCESS, AUTH_ERROR, AUTH_SIGNOUT, AUTH_CURRENT } from './constants';
+import { AUTH_SIGNIN, AUTH_SUCCESS, AUTH_ERROR, AUTH_SIGNOUT, AUTH_CURRENT, AUTH_SOCIAL_URL } from './constants';
 
 export function authSignin(payload) {
 	return {
@@ -30,6 +30,13 @@ export function authSignout() {
 export function authCurrent(payload) {
 	return {
 		type: AUTH_CURRENT,
+		payload
+	}
+}
+
+export function authSocialUrl(payload) {
+	return {
+		type: AUTH_SOCIAL_URL,
 		payload
 	}
 }

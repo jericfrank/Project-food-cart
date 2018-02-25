@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Fields } from 'redux-form';
 
 import { SignInPageWrapper, SignInFormWrapper } from './css';
-import { authSignin } from './actions';
+import { authSignin, authSocialUrl } from './actions';
 import { selectSignInPageError } from './selectors';
 
 const FormItem = Form.Item;
@@ -15,7 +15,8 @@ class SignInPage extends Component {
     constructor() {
         super();
 
-        this.renderError = this.renderError.bind(this);
+        this.renderError       = this.renderError.bind(this);
+        this.handleSocialLogin = this.handleSocialLogin.bind(this);
     }
 
 	componentDidMount() {
@@ -24,6 +25,10 @@ class SignInPage extends Component {
 
     handleFormSubmit( { email, password } ) {
         this.props.authSignin( { email, password } );
+    }
+
+    handleSocialLogin( e ) {
+        this.props.authSocialUrl( e.target.name );
     }
 
     renderFields( fields ) {
@@ -70,10 +75,10 @@ class SignInPage extends Component {
                             </Button>
                             {this.renderError()}
                             <Divider />
-                            <Button icon="github" className="login-form-button">
+                            <Button onClick={this.handleSocialLogin} name="github" icon="github" className="login-form-button">
                                 Sign in with Github
                             </Button>
-                            <Button icon="google" className="login-form-button">
+                            <Button onClick={this.handleSocialLogin} name="google" icon="google" className="login-form-button">
                                 Sign in with Google
                             </Button>
                         </FormItem>
@@ -104,7 +109,8 @@ const mapStateToProps = createStructuredSelector( {
 
 export function mapDispatchToProps ( dispatch ) {
     return {
-        authSignin : ( payload ) => dispatch( authSignin( payload ) )
+        authSignin    : ( payload ) => dispatch( authSignin( payload ) ),
+        authSocialUrl : ( payload ) => dispatch( authSocialUrl( payload ) )
     };
 }
 
