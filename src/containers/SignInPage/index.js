@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Icon, Button, Divider, Alert } from 'antd';
+import { Form, Icon, Button, Divider } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form/immutable';
 
 import InputField from 'components/Input';
+import Alert from 'components/Alert';
+
 import { mustRequired, mustEmail, warnEmail } from 'utils/validator';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
 import { authSignin, authSocialUrl } from './actions';
@@ -17,30 +19,26 @@ class SignInPage extends Component {
     constructor() {
         super();
 
-        this.renderError       = this.renderError.bind(this);
+        this.handleFormSubmit  = this.handleFormSubmit.bind(this);
         this.handleSocialLogin = this.handleSocialLogin.bind(this);
+        this.renderButtons     = this.renderButtons.bind(this);
     }
 
 	componentDidMount() {
 		//
 	}
 
-    handleFormSubmit( { email, password } ) {
-        this.props.authSignin( { email, password } );
+    handleFormSubmit( form ) {
+        const payload = {
+            email    : form.get( 'email' ),
+            password : form.get( 'password' )
+        };
+        
+        this.props.authSignin( payload );
     }
 
     handleSocialLogin( e ) {
         this.props.authSocialUrl( e.target.name );
-    }
-
-    renderError() {
-        const { errorMsg } = this.props;
-
-        if ( errorMsg ) {
-            return (
-                <Alert message={`Error: ${errorMsg}`} type="error" style={{ marginTop: 10 }} showIcon={false} banner/>
-            );
-        }
     }
 
     renderButtons() {
@@ -54,7 +52,7 @@ class SignInPage extends Component {
                         Create account
                     </Button>
                 </Link>
-                {this.renderError()}
+                <Alert message={this.props.errorMsg} type="error"/>
                 <Divider />
                 <Button onClick={this.handleSocialLogin} name="github" icon="github" className="login-form-button">
                     Sign in with Github
@@ -71,7 +69,7 @@ class SignInPage extends Component {
         return (
             <SignInPageWrapper>
                 <SignInFormWrapper>
-                    <Form onSubmit={handleSubmit( this.handleFormSubmit.bind(this) )} className="login-form">
+                    <Form onSubmit={handleSubmit( this.handleFormSubmit )} className="login-form">
                         <Field
                             name="email"
                             type="text"
