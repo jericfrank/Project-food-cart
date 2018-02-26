@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, Button, Menu, Dropdown } from 'antd';
@@ -28,7 +29,7 @@ class HeaderWrapper extends Component {
         const { authenticate, user } = this.props;
 
         if ( authenticate ) {
-            const { providers } = user;
+            const { avatar } = _.find(user.providers, { provider: user.provider });
 
             const menu = (
                 <Menu onClick={this.handleNavigate}>
@@ -42,7 +43,7 @@ class HeaderWrapper extends Component {
                     <Category />
                     <Button icon="shopping-cart">Cart(2)</Button>
                     <Dropdown overlay={menu} placement="bottomRight">
-                        <Avatar shape="square" src={providers[0].avatar}/>
+                        <Avatar shape="square" src={avatar}/>
                     </Dropdown>
                 </div>
             );
