@@ -18,6 +18,10 @@ export const SignInFormWrapper = styled.div`
     .error {
         color : red;
     }
+
+    .warning {
+        color : #f2d376;
+    }
 `;
 
 export const SignInPageWrapper = styled.div`

@@ -1,11 +1,11 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Divider, Alert } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { reduxForm, Fields } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 
+import { mustRequired, mustEmail, warnEmail } from 'utils/validator';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
 import { authSignin, authSocialUrl } from './actions';
 import { selectSignInPageError } from './selectors';
@@ -32,20 +32,12 @@ class SignInPage extends Component {
         this.props.authSocialUrl( e.target.name );
     }
 
-    renderFields( fields ) {
-        const { email, password } = fields;
-
+    renderField( { input, label, icon, type, meta: { touched, error, warning } } ) {
         return (
-            <div>
-                <FormItem>
-                    <Input {...email.input} prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-                    {email.meta.touched && email.meta.error && <span className="error">{email.meta.error}</span>}
-                </FormItem>
-                <FormItem>
-                    <Input {...password.input} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Password" type="password"/>
-                    {password.meta.touched && password.meta.error && <span className="error">{password.meta.error}</span>}
-                </FormItem>
-            </div>
+            <FormItem>
+                <Input {...input} prefix={icon} placeholder={label} type={type} />
+                {touched && ((error && <span className="error">{error}</span>) || (warning && <span className="warning">{warning}</span>))}
+            </FormItem>
         );
     }
 
@@ -60,13 +52,29 @@ class SignInPage extends Component {
     }
 
     render() {
-        const { handleSubmit, fields } = this.props;
+        const { handleSubmit } = this.props;
 
         return (
             <SignInPageWrapper>
                 <SignInFormWrapper>
                     <Form onSubmit={handleSubmit( this.handleFormSubmit.bind(this) )} className="login-form">
-                        <Fields names={fields} component={this.renderFields.bind(this)}/>
+                        <Field
+                            name="email"
+                            type="text"
+                            component={this.renderField}
+                            label="Email"
+                            icon={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            validate={[mustRequired, mustEmail]}
+                            warn={warnEmail}
+                        />
+                        <Field
+                            name="password"
+                            type="password"
+                            component={this.renderField}
+                            label="Password"
+                            icon={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            validate={[mustRequired]}
+                        />
                         <FormItem>
                             <Button type="primary" htmlType="submit" className="login-form-button">
                                 Sign in
@@ -92,20 +100,6 @@ class SignInPage extends Component {
     }
 }
 
-function validator({ email, password }) {
-    const errors = {};
-
-    if ( _.isEmpty(email) ) {
-        errors.email = 'Email is required';
-    }
-
-    if ( _.isEmpty(password) ) {
-        errors.password = 'Password is required';
-    }
-
-    return errors;
-}
-
 const mapStateToProps = createStructuredSelector( {
     errorMsg : selectSignInPageError()
 } );
@@ -118,9 +112,7 @@ export function mapDispatchToProps ( dispatch ) {
 }
 
 SignInPage = reduxForm({
-    form     : 'SignInPageForm',
-    fields   : [ 'email', 'password' ],
-    validate : validator
+    form: 'SignInPageForm'
 })(SignInPage);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
