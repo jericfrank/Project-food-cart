@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Icon, Input, Button, Divider, Alert } from 'antd';
+import { Form, Icon, Button, Divider, Alert } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form/immutable';
 
+import InputField from 'components/Input';
 import { mustRequired, mustEmail, warnEmail } from 'utils/validator';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
 import { authSignin, authSocialUrl } from './actions';
@@ -32,15 +33,6 @@ class SignInPage extends Component {
         this.props.authSocialUrl( e.target.name );
     }
 
-    renderField( { input, label, icon, type, meta: { touched, error, warning } } ) {
-        return (
-            <FormItem>
-                <Input {...input} prefix={icon} placeholder={label} type={type} />
-                {touched && ((error && <span className="error">{error}</span>) || (warning && <span className="warning">{warning}</span>))}
-            </FormItem>
-        );
-    }
-
     renderError() {
         const { errorMsg } = this.props;
 
@@ -51,6 +43,28 @@ class SignInPage extends Component {
         }
     }
 
+    renderButtons() {
+        return (
+            <FormItem>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    Sign in
+                </Button>
+                <Link to="signup">
+                    <Button className="login-form-button">
+                        Create account
+                    </Button>
+                </Link>
+                {this.renderError()}
+                <Divider />
+                <Button onClick={this.handleSocialLogin} name="github" icon="github" className="login-form-button">
+                    Sign in with Github
+                </Button>
+                <Button onClick={this.handleSocialLogin} name="google" icon="google" className="login-form-button">
+                    Sign in with Google
+                </Button>
+            </FormItem>
+        );
+    }
     render() {
         const { handleSubmit } = this.props;
 
@@ -61,7 +75,7 @@ class SignInPage extends Component {
                         <Field
                             name="email"
                             type="text"
-                            component={this.renderField}
+                            component={InputField}
                             label="Email"
                             icon={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             validate={[mustRequired, mustEmail]}
@@ -70,29 +84,12 @@ class SignInPage extends Component {
                         <Field
                             name="password"
                             type="password"
-                            component={this.renderField}
+                            component={InputField}
                             label="Password"
                             icon={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             validate={[mustRequired]}
                         />
-                        <FormItem>
-                            <Button type="primary" htmlType="submit" className="login-form-button">
-                                Sign in
-                            </Button>
-                            <Link to="signup">
-                                <Button className="login-form-button">
-                                    Create account
-                                </Button>
-                            </Link>
-                            {this.renderError()}
-                            <Divider />
-                            <Button onClick={this.handleSocialLogin} name="github" icon="github" className="login-form-button">
-                                Sign in with Github
-                            </Button>
-                            <Button onClick={this.handleSocialLogin} name="google" icon="google" className="login-form-button">
-                                Sign in with Google
-                            </Button>
-                        </FormItem>
+                        {this.renderButtons()}
                     </Form>
                 </SignInFormWrapper>
             </SignInPageWrapper>
