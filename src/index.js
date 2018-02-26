@@ -14,6 +14,8 @@ import { authCurrent } from 'containers/SignInPage/actions';
 import { setAuthorizationToken } from 'utils/request';
 import { expireToken } from 'utils/handleToken';
 
+import DevTools from 'components/DevTools';
+
 if ( localStorage.getItem( 'token' ) ) {
 	try {
 		const token  = localStorage.getItem( 'token' );
@@ -32,7 +34,10 @@ if ( localStorage.getItem( 'token' ) ) {
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
-	        <App />
+			<div>
+				<App />
+				{ ( process.env.NODE_ENV === "development" ) ? <DevTools/> : '' }
+			</div>
 	    </Router>
 	</Provider>,
     document.getElementById('root')
