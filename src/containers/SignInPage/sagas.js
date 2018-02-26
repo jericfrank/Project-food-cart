@@ -3,7 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { postRequest, getRequest } from 'utils/request';
 import { handleToken, expireToken } from 'utils/handleToken';
 
-import { authSuccess, authError, authSignout } from './actions';
+import { authSuccess, authError } from './actions';
 import { AUTH_SIGNIN, AUTH_SIGNOUT, AUTH_SOCIAL_URL } from './constants';
 
 function* watchAuthSignin( action ) {
@@ -22,7 +22,6 @@ function* watchAuthSignout() {
     try {
         yield call( getRequest, 'logout' );
         yield call( expireToken );
-        yield put( authSignout() );
         yield put( push( '/signin' ) );
     } catch (e) {
         yield put( push( '/signin' ) );
