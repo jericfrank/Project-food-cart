@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Button, Divider } from 'antd';
@@ -8,10 +9,10 @@ import { reduxForm, Field } from 'redux-form/immutable';
 import InputField from 'components/Input';
 import Alert from 'components/Alert';
 
-import { mustRequired, mustEmail, warnEmail } from 'utils/validator';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
 import { authSignin, authSocialUrl } from './actions';
 import { selectSignInPageError } from './selectors';
+import { FIELDS } from './constants';
 
 const FormItem = Form.Item;
 
@@ -63,6 +64,22 @@ class SignInPage extends Component {
             </FormItem>
         );
     }
+
+    renderField( { name, type, label, validate, warn, icon }, index ) {
+        return (
+            <Field
+                key={index}
+                name={name}
+                type={type}
+                component={InputField}
+                label={label}
+                icon={<Icon type={icon} />}
+                validate={validate}
+                warn={warn}
+            />
+        );
+    }
+
     render() {
         const { handleSubmit } = this.props;
 
@@ -70,23 +87,7 @@ class SignInPage extends Component {
             <SignInPageWrapper>
                 <SignInFormWrapper>
                     <Form onSubmit={handleSubmit( this.handleFormSubmit )} className="login-form">
-                        <Field
-                            name="email"
-                            type="text"
-                            component={InputField}
-                            label="Email"
-                            icon={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            validate={[mustRequired, mustEmail]}
-                            warn={warnEmail}
-                        />
-                        <Field
-                            name="password"
-                            type="password"
-                            component={InputField}
-                            label="Password"
-                            icon={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            validate={[mustRequired]}
-                        />
+                        { _.map( FIELDS, this.renderField ) }
                         {this.renderButtons()}
                     </Form>
                 </SignInFormWrapper>
