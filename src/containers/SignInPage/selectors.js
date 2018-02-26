@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectSignInPageDomain = ( state ) => state.auth;
+const selectSignInPageDomain = ( state ) => state.get( 'auth' );
 
 const selectSignInPageAuth = () => createSelector(
 	selectSignInPageDomain,

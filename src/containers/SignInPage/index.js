@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Divider, Alert } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field } from 'redux-form/immutable';
 
 import { mustRequired, mustEmail, warnEmail } from 'utils/validator';
 import { SignInPageWrapper, SignInFormWrapper } from './css';
