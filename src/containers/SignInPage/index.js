@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Form, Icon, Button, Divider } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -11,36 +11,21 @@ import Alert from 'components/Alert';
 
 import { SignInPageWrapper, SignInFormWrapper } from './css';
 import { authSignin, authSocialUrl } from './actions';
-import { selectSignInPageError } from './selectors';
+import { selectSignInPageError, selectSignInPageAuth } from './selectors';
 import { FIELDS } from './constants';
 
 const FormItem = Form.Item;
 
-class SignInPage extends Component {
+export class SignInPage extends Component {
     constructor() {
         super();
 
-        this.handleFormSubmit  = this.handleFormSubmit.bind(this);
-        this.handleSocialLogin = this.handleSocialLogin.bind(this);
         this.renderButtons     = this.renderButtons.bind(this);
     }
 
 	componentDidMount() {
 		//
 	}
-
-    handleFormSubmit( form ) {
-        const payload = {
-            email    : form.get( 'email' ),
-            password : form.get( 'password' )
-        };
-        
-        this.props.authSignin( payload );
-    }
-
-    handleSocialLogin( e ) {
-        this.props.authSocialUrl( e.target.name );
-    }
 
     renderButtons() {
         return (
@@ -55,10 +40,10 @@ class SignInPage extends Component {
                 </Link>
                 <Alert message={this.props.errorMsg} type="error"/>
                 <Divider />
-                <Button onClick={this.handleSocialLogin} name="github" icon="github" className="login-form-button">
+                <Button onClick={this.props.onAuthSocialUrl} name="github" icon="github" className="login-form-button">
                     Sign in with Github
                 </Button>
-                <Button onClick={this.handleSocialLogin} name="google" icon="google" className="login-form-button">
+                <Button onClick={this.props.onAuthSocialUrl} name="google" icon="google" className="login-form-button">
                     Sign in with Google
                 </Button>
             </FormItem>
@@ -83,10 +68,16 @@ class SignInPage extends Component {
     render() {
         const { handleSubmit } = this.props;
 
+        if ( this.props.authenticate ) {
+            return (
+                <Redirect to="/home"/>
+            );
+        }
+
         return (
             <SignInPageWrapper>
                 <SignInFormWrapper>
-                    <Form onSubmit={handleSubmit( this.handleFormSubmit )} className="login-form">
+                    <Form onSubmit={handleSubmit( this.props.onAuthSignin )} className="login-form">
                         { _.map( FIELDS, this.renderField ) }
                         {this.renderButtons()}
                     </Form>
@@ -97,13 +88,14 @@ class SignInPage extends Component {
 }
 
 const mapStateToProps = createStructuredSelector( {
-    errorMsg : selectSignInPageError()
+    errorMsg     : selectSignInPageError(),
+    authenticate : selectSignInPageAuth()
 } );
 
 export function mapDispatchToProps ( dispatch ) {
     return {
-        authSignin    : ( payload ) => dispatch( authSignin( payload ) ),
-        authSocialUrl : ( payload ) => dispatch( authSocialUrl( payload ) )
+        onAuthSignin    : ( payload ) => dispatch( authSignin( payload.toJS() ) ),
+        onAuthSocialUrl : ( e ) => dispatch( authSocialUrl( e.target.name ) )
     };
 }
 
